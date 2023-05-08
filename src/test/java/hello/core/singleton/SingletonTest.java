@@ -6,8 +6,13 @@ import hello.core.member.MemberServiceImpl;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 public class SingletonTest {
+
+    ApplicationContext ac = new AnnotationConfigApplicationContext(AppConfig.class);
+
     @Test
     @DisplayName("스프링 없는 순수한 DI 컨테이너")
     void pureContainer(){
@@ -38,7 +43,13 @@ public class SingletonTest {
         Assertions.assertThat(singletonService).isSameAs(singletonService2);
         // same ==
         // equal
+    }
 
-
+    @Test
+    @DisplayName("Spring Container는 객체를 싱글톤으로 관리한다.")
+    void singletonContainerTest(){
+        MemberServiceImpl memberService1 = ac.getBean("memberService", MemberServiceImpl.class);
+        MemberServiceImpl memberService2 = ac.getBean("memberService", MemberServiceImpl.class);
+        Assertions.assertThat(memberService1).isSameAs(memberService2);
     }
 }
