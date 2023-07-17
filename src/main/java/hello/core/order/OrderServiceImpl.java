@@ -14,6 +14,16 @@ public class OrderServiceImpl implements OrderService {
     //private final DiscountPolicy discountPolicy = new FixDiscountPolicy();
     private final DiscountPolicy discountPolicy;
 
+    // 생성자가 한개만 있으면 @Autowired를 굳이 지정해주지 않아도 된다.
+
+    /**
+     * 수정자주입(Setter)
+     * 수정자에다가 Autowired를 넣어줘도 주입이 되긴 함.
+     * 하지만 메서드를 사용하는 경우 덮어 쓸 수 있음.
+     * 불변의 법칙에 어긋남.
+     * 그래서 선택적인, 변경 가능성이 있는 의존관계에 사용함
+     * @Autowired(required=false) 사용하면 필수값이 아니게 됨
+     */
     @Autowired
     public OrderServiceImpl(MemberRepository memberRepository, DiscountPolicy discountPolicy) {
         this.memberRepository = memberRepository;
