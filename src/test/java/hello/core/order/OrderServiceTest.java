@@ -30,6 +30,7 @@ public class OrderServiceTest {
 
     }
     //일반 메서드 주입
+    // Spring bean이 아니면 동작하지 않는다.
     @Autowired
     void test(MemberRepository memberRepository){
         System.out.println("test");
