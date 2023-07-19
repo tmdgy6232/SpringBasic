@@ -23,8 +23,8 @@ public class OrderServiceImpl implements OrderService {
      * 불변의 법칙에 어긋남.
      * 그래서 선택적인, 변경 가능성이 있는 의존관계에 사용함
      * @Autowired(required=false) 사용하면 필수값이 아니게 됨
+     * 생성자가 하나만 있으면 생성자에 Autowired 어노테이션을 빼도 됨,.
      */
-    @Autowired
     public OrderServiceImpl(MemberRepository memberRepository, DiscountPolicy discountPolicy) {
         this.memberRepository = memberRepository;
         this.discountPolicy = discountPolicy;
