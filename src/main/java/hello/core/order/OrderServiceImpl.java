@@ -1,6 +1,7 @@
 package hello.core.order;
 
 import hello.core.discount.DiscountPolicy;
+import hello.core.discount.MainDiscountPolicy;
 import hello.core.member.Member;
 import hello.core.member.MemberRepository;
 import lombok.RequiredArgsConstructor;
@@ -13,7 +14,7 @@ public class OrderServiceImpl implements OrderService {
 
     private final MemberRepository memberRepository;
     //private final DiscountPolicy discountPolicy = new FixDiscountPolicy();
-    @Qualifier("mainDiscountPolicy")
+    @MainDiscountPolicy
     private final DiscountPolicy rateDiscountPolicy;
 
     // 생성자가 한개만 있으면 @Autowired를 굳이 지정해주지 않아도 된다.
@@ -39,7 +40,7 @@ public class OrderServiceImpl implements OrderService {
 *  잘 동작하는걿 확인할 수 있따.
 *
 *  2. @Quilifier 를 사용
-*  @Quilifier 추가 구분자를 붕텨주는 방법이다. 주입 시 추가적인 방법을 제공하는 것이지, 빈 이름을 변경하는것은 아니다.
+*  @Quilifier 추가 구분자를 붙여주는 방법이다. 주입 시 추가적인 방법을 제공하는 것이지, 빈 이름을 변경하는것은 아니다.
 *  @Component 밑에 @Quilifier("aaa")로 지정하고 불러오는 부분에서 똑같이 사용한다.
 *  또한 이 이후에 찾지 못하면 1번과 같이 변수명으로도 매칭하는 동작을 이어 수행한다.*
 *  단점은 모든 코드에 @Quilifier를 붙여야한다. 하지만 primary는 안붙여줘도 되긴 한다.
